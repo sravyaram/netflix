@@ -94,7 +94,7 @@ withDockerRegistry(credentialsId: 'dockercreds', toolName: 'docker') {
         {
             steps
             {
- sh 'kubectl apply -f manifest1.yaml'                
+ sh 'kubectl apply -f manifest.yaml'                
 }
 }
     }
