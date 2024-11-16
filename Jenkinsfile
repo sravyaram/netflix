@@ -7,7 +7,7 @@ pipeline {
     stages {
         stage('checkout') {
             steps {
-                git branch: 'main', url: 'https://github.com/nocturnaldevops/Project1.git'
+                git branch: 'main', url: 'https://github.com/nocturnaldevops/netflix.git'
             }
         }
         
