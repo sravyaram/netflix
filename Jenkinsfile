@@ -90,5 +90,12 @@ withDockerRegistry(credentialsId: 'dockercreds', toolName: 'docker') {
         }
     }
 }
+        stage("deploytheapplicationtok8s")
+        {
+            steps
+            {
+ 'sh kubectl apply -f manifest1.yaml'                
 }
+}
+    }
 }
