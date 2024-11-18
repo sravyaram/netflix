@@ -87,6 +87,19 @@ stage("deploy")
             sh 'docker build -t nareshtechnologies/netflixv1 .'
         }
     }
+        stage("push docker image")
+{
+    steps
+    {
+        script {
+ // This step should not normally be used in your script. Consult the inline help for details.
+withDockerRegistry(credentialsId: 'dockercreds', toolName: 'docker') {
+    sh "docker push  nareshtechnologies/application:v1"
+   
+}          
+        }
+    }
+}
         
     }
 
