@@ -68,7 +68,7 @@ stage('Quality Gate') {
                     slackSend channel: 'q1project1', message: 'qg successful'
                 }
             }
-      }   */
+      }   
 stage("deploy")
         {
             steps
@@ -77,6 +77,14 @@ stage("deploy")
             {
                 sh 'mvn deploy'
             }
+        }
+    }
+    */
+         stage("createdockerimage")
+    {
+        steps
+        {
+            sh 'docker build -t nareshtechnologies/netflixv1 .'
         }
     }
         
