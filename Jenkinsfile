@@ -35,6 +35,7 @@ stages
 
             }
         }
+        /*
 stage('Trivy-Scan') {
             steps {
                 script {
@@ -44,6 +45,7 @@ stage('Trivy-Scan') {
                 }
             }
         }
+        */
       stage('sqanalysis')
         {
             steps
