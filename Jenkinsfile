@@ -35,7 +35,6 @@ stages
 
             }
         }
-    }
 stage('Trivy-Scan') {
             steps {
                 script {
@@ -68,6 +67,7 @@ stage('Quality Gate') {
                 }
             }
       }
+    }
 
     
     post{
