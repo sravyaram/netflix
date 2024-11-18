@@ -25,10 +25,9 @@ kind: Service
 metadata:
   name: mysvc
 spec:
-  type: NodePort
-  selector: 
+  type: LoadBalancer  # Change from NodePort to LoadBalancer
+  selector:
     app: myapp
   ports:
     - targetPort: 80
-      nodePort: 32000
       port: 80
