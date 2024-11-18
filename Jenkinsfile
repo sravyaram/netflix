@@ -36,6 +36,40 @@ stages
             }
         }
     }
+stage('Trivy-Scan') {
+            steps {
+                script {
+                    // Run Trivy scan and save the results to a file
+                    sh 'trivy fs --format json --output trivy_scan_report.json .'
+                    
+                }
+            }
+        }
+      stage('sqanalysis')
+        {
+            steps
+            {
+                withSonarQubeEnv('sonarserver'){
+                sh ' $SCANNER_HOME/bin/sonar-scanner -Dsonar.projectName=projectNetflix -Dsonar.projectKey=projectNetflix -Dsonar.java.binaries=. '
+                slackSend channel: 'q1project1', message: 'code scan over - report of the scan is available at : http://13.50.206.33:9000/dashboard?id=projectNetflix'
+            }
+        }
+    }
+stage('Quality Gate') {
+            steps {
+                script {
+                    // Wait for the SonarQube analysis to finish
+                    def qg = waitForQualityGate()
+                    if (qg.status != 'OK') {
+                        error "Quality Gate failed: ${qg.status}"
+                        slackSend channel: 'q1project1', message: 'qg failed'
+                    }
+                    slackSend channel: 'q1project1', message: 'qg successful'
+                }
+            }
+      }
+
+    
     post{
         failure
         {
