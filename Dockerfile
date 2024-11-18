@@ -3,7 +3,7 @@ FROM tomcat
 
 # Set the working directory (optional)
 WORKDIR /usr/local/tomcat
-COPY target/devops.war /usr/local/tomcat/webapps/ROOT.war
+COPY target/application.war /usr/local/tomcat/webapps/ROOT.war
 
 #RUN cp -R webapps.dist/* webapps/
 #RUN cd webapps/
