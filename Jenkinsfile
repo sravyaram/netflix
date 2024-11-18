@@ -16,5 +16,20 @@ stages
            slackSend channel: 'q1project1', message: ':::Netflix:::: source code checked out successfully'
             }
         }
+     stage("compile")
+        {
+            steps
+            {
+                sh 'mvn compile'
+            }
+        }
+        
+     stage("test")
+        {
+            steps
+            {
+                sh 'mvn test'
+            }
+        }
     }
 }
