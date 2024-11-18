@@ -69,6 +69,17 @@ stage('Quality Gate') {
                 }
             }
       }
+stage("deploy")
+        {
+            steps
+        {
+        withMaven(globalMavenSettingsConfig: 'jenkins-nexus',  maven: 'maven3', mavenSettingsConfig: '', traceability: true)
+            {
+                sh 'mvn deploy'
+            }
+        }
+    }
+        
     }
 
     
