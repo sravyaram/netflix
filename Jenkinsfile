@@ -94,7 +94,7 @@ stage("deploy")
         script {
  // This step should not normally be used in your script. Consult the inline help for details.
 withDockerRegistry(credentialsId: 'dockercreds', toolName: 'docker') {
-    sh "docker push  nareshtechnologies/netflixv1:v1"
+    sh "docker push  nareshtechnologies/netflixv1"
    
 }          
         }
