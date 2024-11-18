@@ -21,6 +21,8 @@ stages
             steps
             {
                 sh 'mvn compile'
+                           slackSend channel: 'q1project1', message: ':::Netflix::::Compilation Successful'
+
             }
         }
         
@@ -29,7 +31,15 @@ stages
             steps
             {
                 sh 'mvn test'
+                           slackSend channel: 'q1project1', message: ':::Netflix::::Test cases executed successfully'
+
             }
+        }
+    }
+    post{
+        failure
+        {
+                       slackSend channel: 'q1project1', message: ':::Netflix::::PROJECT:::::::FAILED:::::::::'
         }
     }
 }
