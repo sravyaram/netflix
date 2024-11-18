@@ -13,7 +13,7 @@ stages
        {
         steps {
            git 'https://github.com/nocturnaldevops/netflix.git'            
-           slackSend channel: 'q1project1', message: 'Netflix source code checked out successfully'
+           slackSend channel: 'q1project1', message: ':::Netflix:::: source code checked out successfully'
             }
         }
     }
