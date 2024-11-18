@@ -12,7 +12,7 @@ stages
     stage('checkoutsc') 
        {
         steps {
-           git 'https://github.com/nocturnaldevops/netflix.git'            
+           git branch: 'main', url: 'https://github.com/nocturnaldevops/netflix.git'     
            slackSend channel: 'q1project1', message: ':::Netflix:::: source code checked out successfully'
             }
         }
