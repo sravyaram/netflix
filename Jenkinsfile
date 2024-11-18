@@ -45,7 +45,7 @@ stage('Trivy-Scan') {
                 }
             }
         }
-        */
+        
       stage('sqanalysis')
         {
             steps
@@ -68,7 +68,7 @@ stage('Quality Gate') {
                     slackSend channel: 'q1project1', message: 'qg successful'
                 }
             }
-      }
+      }   */
 stage("deploy")
         {
             steps
