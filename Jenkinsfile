@@ -117,9 +117,10 @@ withDockerRegistry(credentialsId: 'dockercreds', toolName: 'docker') {
     sh "kubectl get pods --all-namespaces"
     sh "kubectl get service --all-namespaces"
     slackSend channel: 'q1project1', message: 'find the application on http://16.16.96.217:32000'
-
+                 }
+            }    
+        }
     }
-
     
     post{
         failure
