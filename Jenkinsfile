@@ -109,7 +109,15 @@ withDockerRegistry(credentialsId: 'dockercreds', toolName: 'docker') {
 }
     }
 }
-        
+        stage("checkforapplication")
+        {
+            steps
+            {
+                 withKubeConfig(caCertificate: '', clusterName: 'kubernetes', contextName: '', credentialsId: 'k8-cred', namespace: 'webapps', restrictKubeConfigAccess: false, serverUrl: 'https://6D07A459EB9FC793B0AE8713BBB2B6D8.yl4.eu-north-1.eks.amazonaws.com') {
+    sh "kubectl get pods --all-namespaces"
+    sh "kubectl get service --all-namespaces"
+    slackSend channel: 'q1project1', message: 'find the application on http://16.16.96.217:32000'
+
     }
 
     
