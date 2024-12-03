@@ -12,7 +12,7 @@ stages
     stage('checkoutsc') 
        {
         steps {
-           git branch: 'main', url: 'https://github.com/nocturnaldevops/netflix.git'     
+           git branch: 'main', url: 'https://github.com/sravyaram/netflix.git'     
            slackSend channel: 'q1project1', message: ':::Netflix:::: source code checked out successfully'
             }
         }
@@ -84,7 +84,7 @@ stage("deploy")
     {
         steps
         {
-            sh 'docker build -t nareshtechnologies/netflixv1 .'
+            sh 'docker build -t sravyaram/netflixv1 .'
         }
     }
         stage("push docker image")
@@ -94,7 +94,7 @@ stage("deploy")
         script {
  // This step should not normally be used in your script. Consult the inline help for details.
 withDockerRegistry(credentialsId: 'dockercreds', toolName: 'docker') {
-    sh "docker push  nareshtechnologies/netflixv1"
+    sh "docker push  sravyaram/netflixv1"
    
 }          
         }
