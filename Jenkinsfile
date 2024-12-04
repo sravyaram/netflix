@@ -11,19 +11,19 @@ pipeline {
         stage('checkoutsc') {
             steps {
                 git branch: 'main', url: 'https://github.com/sravyaram/netflix.git'
-                slackSend channel: 'devopsproject1', message: ':::Netflix:::: source code checked out successfully'
+                slackSend channel: 'project1', message: ':::Netflix:::: source code checked out successfully'
             }
         }
         stage("compile") {
             steps {
                 sh 'mvn compile'
-                slackSend channel: 'devopsproject1', message: ':::Netflix::::Compilation Successful'
+                slackSend channel: 'project1', message: ':::Netflix::::Compilation Successful'
             }
         }
         stage("test") {
             steps {
                 sh 'mvn test'
-                slackSend channel: 'devopsproject1', message: ':::Netflix::::Test cases executed successfully'
+                slackSend channel: 'project1', message: ':::Netflix::::Test cases executed successfully'
             }
         }
         stage('Trivy-Scan') {
@@ -38,7 +38,7 @@ pipeline {
             steps {
                 withSonarQubeEnv('sonarserver') {
                     sh '$SCANNER_HOME/bin/sonar-scanner -Dsonar.projectName=projectNetflix -Dsonar.projectKey=projectNetflix -Dsonar.java.binaries=. '
-                    slackSend channel: 'devopsproject1', message: 'code scan over - report of the scan is available at : http://13.50.206.33:9000/dashboard?id=projectNetflix'
+                    slackSend channel: 'project1', message: 'code scan over - report of the scan is available at : http://13.50.206.33:9000/dashboard?id=projectNetflix'
                 }
             }
         }
@@ -49,9 +49,9 @@ pipeline {
                     def qg = waitForQualityGate()
                     if (qg.status != 'OK') {
                         error "Quality Gate failed: ${qg.status}"
-                        slackSend channel: 'devopsproject1', message: 'qg failed'
+                        slackSend channel: 'project1', message: 'qg failed'
                     }
-                    slackSend channel: 'devopsproject1', message: 'qg successful'
+                    slackSend channel: 'project1', message: 'qg successful'
                 }
             }
         }
@@ -97,7 +97,7 @@ pipeline {
     }
     post {
         failure {
-            slackSend channel: 'devopsproject1', message: ':::Netflix::::PROJECT:::::::FAILED:::::::::'
+            slackSend channel: 'project1', message: ':::Netflix::::PROJECT:::::::FAILED:::::::::'
         }
     }
 }
