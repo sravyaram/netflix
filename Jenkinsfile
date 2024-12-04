@@ -100,7 +100,7 @@ withDockerRegistry(credentialsId: 'dockercreds', toolName: 'docker') {
         }
     }
 }
-  */
+  /*
         stage("deploytok8s")
 {
     steps
@@ -122,7 +122,7 @@ withDockerRegistry(credentialsId: 'dockercreds', toolName: 'docker') {
             }    
         }
     }
-    /*
+    */
     post{
         failure
         {
