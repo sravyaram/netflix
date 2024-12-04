@@ -130,3 +130,4 @@ withDockerRegistry(credentialsId: 'dockercreds', toolName: 'docker') {
         }
     }
 }
+}
