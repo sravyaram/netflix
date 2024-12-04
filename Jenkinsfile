@@ -100,7 +100,8 @@ withDockerRegistry(credentialsId: 'dockercreds', toolName: 'docker') {
         }
     }
 }
-      #  stage("deploytok8s")
+  #
+        stage("deploytok8s")
 {
     steps
     {
