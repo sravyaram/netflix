@@ -36,7 +36,7 @@ pipeline {
         }
         stage('sqanalysis') {
             steps {
-                withSonarQubeEnv('sonarserver') {
+                withSonarQubeEnv('sonar-token') {
                     sh '$SCANNER_HOME/bin/sonar-scanner -Dsonar.projectName=projectNetflix -Dsonar.projectKey=projectNetflix -Dsonar.java.binaries=. '
                     slackSend channel: 'project1', message: 'code scan over - report of the scan is available at : http://13.50.206.33:9000/dashboard?id=projectNetflix'
                 }
