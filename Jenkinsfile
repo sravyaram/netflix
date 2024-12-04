@@ -13,7 +13,7 @@ stages
        {
         steps {
            git branch: 'main', url: 'https://github.com/sravyaram/netflix.git'     
-           slackSend channel: 'q1project1', message: ':::Netflix:::: source code checked out successfully'
+           slackSend channel: 'devopsproject1', message: ':::Netflix:::: source code checked out successfully'
             }
         }
      stage("compile")
@@ -21,7 +21,7 @@ stages
             steps
             {
                 sh 'mvn compile'
-                           slackSend channel: 'q1project1', message: ':::Netflix::::Compilation Successful'
+                           slackSend channel: 'devopsproject1', message: ':::Netflix::::Compilation Successful'
 
             }
         }
@@ -31,7 +31,7 @@ stages
             steps
             {
                 sh 'mvn test'
-                           slackSend channel: 'q1project1', message: ':::Netflix::::Test cases executed successfully'
+                           slackSend channel: 'devopsproject1', message: ':::Netflix::::Test cases executed successfully'
 
             }
         }
@@ -52,7 +52,7 @@ stage('Trivy-Scan') {
             {
                 withSonarQubeEnv('sonarserver'){
                 sh ' $SCANNER_HOME/bin/sonar-scanner -Dsonar.projectName=projectNetflix -Dsonar.projectKey=projectNetflix -Dsonar.java.binaries=. '
-                slackSend channel: 'q1project1', message: 'code scan over - report of the scan is available at : http://13.50.206.33:9000/dashboard?id=projectNetflix'
+                slackSend channel: 'devopsproject1', message: 'code scan over - report of the scan is available at : http://13.50.206.33:9000/dashboard?id=projectNetflix'
             }
         }
     }
@@ -63,9 +63,9 @@ stage('Quality Gate') {
                     def qg = waitForQualityGate()
                     if (qg.status != 'OK') {
                         error "Quality Gate failed: ${qg.status}"
-                        slackSend channel: 'q1project1', message: 'qg failed'
+                        slackSend channel: 'devopsproject1', message: 'qg failed'
                     }
-                    slackSend channel: 'q1project1', message: 'qg successful'
+                    slackSend channel: 'devopsproject1', message: 'qg successful'
                 }
             }
       }   
@@ -84,7 +84,7 @@ stage("deploy")
     {
         steps
         {
-            sh 'docker build -t sravyaram/netflixv1 .'
+            sh 'docker build -t sravyaram/netflix .'
         }
     }
         stage("push docker image")
@@ -94,13 +94,13 @@ stage("deploy")
         script {
  // This step should not normally be used in your script. Consult the inline help for details.
 withDockerRegistry(credentialsId: 'dockercreds', toolName: 'docker') {
-    sh "docker push  sravyaram/netflixv1"
+    sh "docker push  sravyaram/netflix"
    
 }          
         }
     }
 }
-        stage("deploytok8s")
+      #  stage("deploytok8s")
 {
     steps
     {
@@ -121,11 +121,11 @@ withDockerRegistry(credentialsId: 'dockercreds', toolName: 'docker') {
             }    
         }
     }
-    
+    #
     post{
         failure
         {
-                       slackSend channel: 'q1project1', message: ':::Netflix::::PROJECT:::::::FAILED:::::::::'
+                       slackSend channel: 'devopsproject1', message: ':::Netflix::::PROJECT:::::::FAILED:::::::::'
         }
     }
 }
